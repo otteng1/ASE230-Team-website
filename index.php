@@ -1,11 +1,25 @@
 <?php
 
 function calculateAge($dob) {
-    $today = new DateTime();
-    $birthDate = new DateTime($dob);
-    $age = $today->diff($birthDate)->y;
-    return $age;
+	$today = new DateTime();
+	$birthDate = new DateTime($dob);
+	$age = $today->diff($birthDate)->y;
+	return $age;
 }
+
+function displayMemberCard($id, $index) {
+	$age = calculateAge($id["dob"]);
+	echo "
+		<div class='member-card'>
+		<h2>{$id['name']}</h2>
+		<p><strong>Age:</strong> $age </p>
+        	<p><strong>Role:</strong> {$id['role']}</p>
+        	<p><strong>Email:</strong> {$id['email']}</p>
+        	<a href='detail.php?id=$index'>View Details</a>
+    		</div>
+	";
+}
+
 
 $team = array(
     1 => array(
@@ -27,10 +41,6 @@ $team = array(
         "email" => "otteng1@mymail.nku.edu",
     )
 );
-
-$age1 = calculateAge($team[1]["dob"]);
-$age2 = calculateAge($team[2]["dob"]);
-$age3 = calculateAge($team[3]["dob"]);
 
 ?>
 <!DOCTYPE html>
@@ -70,10 +80,7 @@ $age3 = calculateAge($team[3]["dob"]);
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
 						    <div class="primary-info col-auto">
-							    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase"><?php echo $team[1]["name"] ?></h1>
-							    <div class="title mb-3"><?php echo $team[1]["role"] ?></div>
-								<?php echo "Age: $age1" ?>
-								<a href="detail.php?id=1" class="btn btn-secondary">See full profile</a>
+							    <?php echo displayMemberCard($team[1], 1) ?>
 						    </div><!--//primary-info-->
 						    <div class="secondary-info col-auto mt-2">
 						    </div><!--//secondary-info-->
@@ -91,10 +98,7 @@ $age3 = calculateAge($team[3]["dob"]);
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
 						    <div class="primary-info col-auto">
-							    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase"><?php echo $team[2]["name"] ?></h1>
-							    <div class="title mb-3"><?php echo $team[2]["role"] ?></div>
-								<?php echo "Age: $age2" ?>
-								<a href="detail.php?id=2" class="btn btn-secondary">See full profile</a>
+							    <?php echo displayMemberCard($team[2], 2) ?>
 						    </div><!--//primary-info-->
 						    <div class="secondary-info col-auto mt-2">
 						    </div><!--//secondary-info-->
@@ -112,10 +116,7 @@ $age3 = calculateAge($team[3]["dob"]);
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
 						    <div class="primary-info col-auto">
-							    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase"><?php echo $team[3]["name"] ?></h1>
-							    <div class="title mb-3"><?php echo $team[3]["role"] ?></div>
-								<?php echo "Age: $age3" ?>
-								<a href="detail.php?id=3" class="btn btn-secondary">See full profile</a>
+							    <?php echo displayMemberCard($team[3], 3) ?>
 						    </div><!--//primary-info-->
 						    <div class="secondary-info col-auto mt-2">
 						    </div><!--//secondary-info-->
@@ -131,7 +132,7 @@ $age3 = calculateAge($team[3]["dob"]);
     
     <footer class="footer text-center pt-2 pb-5">
 	    <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-        <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"></i> by Aliec Johnson, Bob Smith, and Tyler Otten</small>
+        <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"></i> by Alice Johnson, Bob Smith, and Tyler Otten</small>
     </footer>
 
     
