@@ -1,60 +1,93 @@
 <?php
 
 function calculateAge($dob) {
-    $today = new DateTime();
-    $birthDate = new DateTime($dob);
-    $age = $today->diff($birthDate)->y;
-    return $age;
+	$today = new DateTime();
+	$birthDate = new DateTime($dob);
+	$age = $today->diff($birthDate)->y;
+	return $age;
 }
+
+function displayWorkExperience($experience) {
+	echo "
+	<div class='work-experience'>
+        	<h3>{$experience['title']} at {$experience['company']}</h3>
+        	<p><strong>Time:</strong> {$experience['time']}</p>
+        	<p>{$experience['description']}</p>
+    	</div>";
+}
+
+
+function displayAllExperiences($id) {
+	if (!empty($id['experiences'])) {
+    		foreach ($id['experiences'] as $experience) {
+            	displayWorkExperience($experience);
+        	}
+    	} else {
+        	echo "No work experience available.";
+    	}
+}
+
 
 $team = array(
     1 => array(
         "name" => "Alice Johnson",
-	"dob" => "2000-03-13",
+        "dob" => "2000-03-13",
         "role" => "Frontend Developer",
         "email" => "alice@example.com",
-		"phone" => "N/A",
-		"linkedIn" => "N/A",
+        "phone" => "N/A",
+        "linkedIn" => "N/A",
         "bio" => "Loves creating modern and responsive interfaces.",
-		"jobTitle1" => "N/A",
-		"jobCompany" => "N/A",
-		"jobTime" => "N/A",
-		"jobDescription" => "N/A",
-		"skill" => "N/A",
-		"project" => "N/A",
-		"projectDescription" => "N/A"
+        "experiences" => array(
+            array(
+                "title" => "N/A",
+                "company" => "N/A",
+                "time" => "N/A",
+                "description" => "N/A"
+            )
+        ),
+        "skill" => "N/A",
+        "project" => "N/A",
+        "projectDescription" => "N/A"
     ),
     2 => array(
         "name" => "Bob Smith",
-	"dob" => "2001-06-26",
+        "dob" => "2001-06-26",
         "role" => "Backend Developer",
         "email" => "bob@example.com",
-		"phone" => "N/A",
-		"linkedIn" => "N/A",
+        "phone" => "N/A",
+        "linkedIn" => "N/A",
         "bio" => "Enjoys working with APIs and databases.",
-		"jobTitle1" => "N/A",
-		"jobCompany" => "N/A",
-		"jobTime" => "N/A",
-		"jobDescription" => "N/A",
-		"skill" => "N/A",
-		"project" => "N/A",
-		"projectDescription" => "N/A"
+        "experiences" => array(
+            array(
+                "title" => "N/A",
+                "company" => "N/A",
+                "time" => "N/A",
+                "description" => "N/A"
+            )
+        ),
+        "skill" => "N/A",
+        "project" => "N/A",
+        "projectDescription" => "N/A"
     ),
     3 => array(
         "name" => "Tyler Otten",
-	"dob" => "2004-10-15",
+        "dob" => "2004-10-15",
         "role" => "Project Manager",
         "email" => "otteng1@mymail.nku.edu",
-		"phone" => "859-308-7228",
-		"linkedIn" => "www.linkedin.com/in/georgetylerotten",
+        "phone" => "859-308-7228",
+        "linkedIn" => "www.linkedin.com/in/georgetylerotten",
         "bio" => "Keeps projects on track and communicates with clients.",
-		"jobTitle1" => "Library Associate",
-		"jobCompany" => "Kenton County Public Library",
-		"jobTime" => "July 2024 - Present",
-		"jobDescription" => "Serve the community by helping dozens of patrons a day access thousands of resources provided by the library through physical or digital means, including working with patrons to find the resources or items they need in the library or through the multitude of databases on our website.",
-		"skill" => "Java",
-		"project" => "My Own Website",
-		"projectDescription" => "This is a personal website I made for INF286."
+        "experiences" => array(
+            array(
+                "title" => "Library Associate",
+                "company" => "Kenton County Public Library",
+                "time" => "July 2024 - Present",
+                "description" => "Serve the community by helping dozens of patrons a day access thousands of resources provided by the library through physical or digital means, including working with patrons to find the resources or items they need in the library or through the multitude of databases on our website."
+            )
+        ),
+        "skill" => "Java",
+        "project" => "My Own Website",
+        "projectDescription" => "This is a personal website I made for INF286."
     )
 );
 
@@ -153,14 +186,7 @@ $member = $team[$id];
                                 <div class="resume-timeline position-relative">
                                     <article class="resume-timeline-item position-relative pb-5">
                                         <div class="resume-timeline-item-header mb-2">
-                                            <div class="d-flex flex-column flex-md-row">
-                                                <h3 class="resume-position-title font-weight-bold mb-1"><?php echo $team[$id]["jobTitle1"]; ?></h3>
-                                                <div class="resume-company-name ms-auto"><?php echo $team[$id]["jobCompany"]; ?></div>
-                                            </div>
-                                            <div class="resume-position-time"><?php echo $team[$id]["jobTime"]; ?></div>
-                                        </div>
-                                        <div class="resume-timeline-item-desc">
-                                            <p><?php echo $team[$id]["jobDescription"]; ?></p>
+                                            <?php echo displayAllExperiences($team[$id]) ?>
                                         </div>
                                     </article>
                                 </div>
