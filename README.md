@@ -1,3 +1,3 @@
-# Team-website-3
+# ASE230-Team-website
 
 Collaborators: Tyler Otten
